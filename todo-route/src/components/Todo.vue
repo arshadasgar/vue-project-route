@@ -3,19 +3,29 @@
     <div class="col-md-12">
       <h3>Manage tasks</h3>
     </div>
-    <TodoList :pendingtasks="pendingTasks" @markascomplete="markAsComplete"/>
-    <TodoCompletedList :completedtasks="completedTasks" @markaspending="markAsPending"/>
+    <div class="col-md-4">
+      <TodoAdd @addtask="addTask" />
+    </div>
+    <div class="col-md-4">
+      <TodoList :pendingtasks="pendingTasks" @markascomplete="markAsComplete"/>
+    </div>
+    <div class="col-md-4">
+      <TodoCompletedList :completedtasks="completedTasks" @markaspending="markAsPending"/>
+    </div>
   </div>
 </template>
 <script>
 import axios from "axios";
 import TodoList from "./TodoList";
 import TodoCompletedList from "./TodoCompletedList";
+import TodoAdd from "./TodoAdd";
+
 export default {
   name: "Todo",
   components: {
     TodoList,
-    TodoCompletedList
+    TodoCompletedList,
+    TodoAdd
   },
   data: function() {
     return {
@@ -28,7 +38,7 @@ export default {
   },
   methods: {
     fetchTasks: function() {
-      axios.get("http://api.test").then((resp) => {
+      axios.get("http://api.test").then(resp => {
         this.pendingTasks = resp.data.pending;
       });
     },
@@ -39,6 +49,13 @@ export default {
     markAsPending: function(task, index) {
       this.pendingTasks.push(task);
       this.completedTasks.splice(index, 1);
+    },
+    addTask: function(task){
+      let taskObj = {
+        id: 101,
+        title: task
+      }
+      this.pendingTasks.push(taskObj)
     }
   }
 };

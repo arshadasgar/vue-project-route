@@ -1,7 +1,8 @@
 <template>
-  <div class="col-md-4">
     <div class="card">
-      <h4>Completed tasks</h4>
+      <div class="col-md-12">
+        <h4>Completed tasks</h4>
+      </div>
       <div class="row custom_list" v-for="(task, index) in completedtasks" :key="task.id">
         <div class="col-md-9">
           <span class="title">{{ task.title }}</span>
@@ -11,7 +12,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 <script>
 export default {
