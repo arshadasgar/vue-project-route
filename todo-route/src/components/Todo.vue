@@ -30,7 +30,8 @@ export default {
   data: function() {
     return {
       pendingTasks: [],
-      completedTasks: []
+      completedTasks: [],
+      newId: 101
     };
   },
   created: function() {
@@ -52,10 +53,11 @@ export default {
     },
     addTask: function(task){
       let taskObj = {
-        id: 101,
+        id: this.newId,
         title: task
       }
       this.pendingTasks.push(taskObj)
+      this.newId++
     }
   }
 };
