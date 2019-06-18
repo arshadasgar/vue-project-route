@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>Vuex Examples</h2>  
-    <button @click="incrementCount">VUEX state : {{ counter }}</button>
+    <button class="btn btn-raised btn-danger" @click="incrementCount">VUEX state : {{ counter }}</button>
     <label for>Double the count is: {{ doubleCounter }}</label>
   </div>
 </template>
