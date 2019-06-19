@@ -4,7 +4,7 @@
       <h3>Manage tasks</h3>
     </div>
     <div class="col-md-4">
-      <TodoAdd @addtask="addTask" />
+      <TodoAdd @addtask="addTask"/>
     </div>
     <div class="col-md-4">
       <TodoList :pendingtasks="pendingTasks" @markascomplete="markAsComplete"/>
@@ -29,20 +29,11 @@ export default {
   },
   data: function() {
     return {
-      pendingTasks: [],
       completedTasks: [],
       newId: 101
     };
   },
-  created: function() {
-    this.fetchTasks();
-  },
   methods: {
-    fetchTasks: function() {
-      axios.get("http://api.test").then(resp => {
-        this.pendingTasks = resp.data.pending;
-      });
-    },
     markAsComplete: function(task, index) {
       this.completedTasks.push(task);
       this.pendingTasks.splice(index, 1);
@@ -51,13 +42,18 @@ export default {
       this.pendingTasks.push(task);
       this.completedTasks.splice(index, 1);
     },
-    addTask: function(task){
+    addTask: function(task) {
       let taskObj = {
         id: this.newId,
         title: task
-      }
-      this.pendingTasks.push(taskObj)
-      this.newId++
+      };
+      this.pendingTasks.push(taskObj);
+      this.newId++;
+    }
+  },
+  computed: {
+    pendingTasks: function() {
+      return this.$store.state.pendingTasks.pending;
     }
   }
 };
