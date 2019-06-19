@@ -21,14 +21,32 @@
         <VuexExample/>
       </div>
     </div>
+    <div class="col-md-6">
+      <div class="card">
+        <h4>Pending tasks</h4>
+        <ol>
+          <li v-for="(task, index) in pendingTasks" :key="index">{{ task.title }}</li>
+        </ol>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <h4>Completed tasks</h4>
+        <ol>
+          <li v-for="(task, index) in completedTasks" :key="index">{{ task.title }}</li>
+        </ol>
+      </div>
+    </div>
   </div>
 </template>
 <script>
 import VuexExample from "./VuexExample";
+import TodoList from "./TodoList";
 
 export default {
   components: {
-    VuexExample
+    VuexExample,
+    TodoList
   },
   computed: {
     counter: function() {
@@ -39,6 +57,12 @@ export default {
     },
     fetchName: function() {
       return this.$store.state.examplename;
+    },
+    pendingTasks: function() {
+      return this.$store.state.pendingTasks;
+    },
+    completedTasks: function() {
+      return this.$store.state.completedTasks;
     }
   }
 };
