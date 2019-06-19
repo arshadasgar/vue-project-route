@@ -8,7 +8,7 @@
           <span class="title">{{ task.title }}</span>
         </div>
         <div class="col-md-3">
-          <button class="btn btn-danger btn-raised" @click="$emit('markaspending', task, index)">✓</button>
+          <button class="btn btn-danger btn-raised" @click="$emit('markaspending', task, index)">✕</button>
         </div>
       </div>
     </div>

@@ -29,31 +29,33 @@ export default {
   },
   data: function() {
     return {
-      completedTasks: [],
       newId: 101
     };
   },
   methods: {
     markAsComplete: function(task, index) {
-      this.completedTasks.push(task);
-      this.pendingTasks.splice(index, 1);
+      this.$store.commit("addTaskToCompletedTasks", task);
+      this.$store.commit("removeTaskFromPendingTasks", index);
     },
     markAsPending: function(task, index) {
-      this.pendingTasks.push(task);
-      this.completedTasks.splice(index, 1);
+      this.$store.commit("addTaskToPendingTasks", task);
+      this.$store.commit("removeTaskFromCompletedTasks", index);
     },
     addTask: function(task) {
       let taskObj = {
         id: this.newId,
         title: task
       };
-      this.pendingTasks.push(taskObj);
+      this.$store.commit("addTaskToPendingTasks", taskObj);
       this.newId++;
     }
   },
   computed: {
     pendingTasks: function() {
-      return this.$store.state.pendingTasks.pending;
+      return this.$store.state.pendingTasks;
+    },
+    completedTasks: function() {
+      return this.$store.state.completedTasks;
     }
   }
 };
